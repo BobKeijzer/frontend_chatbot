@@ -32,8 +32,8 @@ The frontend supports:
 
 ### Installation
 ```bash
-git clone https://github.com/BobKeijzer/webai-frontend.git
-cd webai-frontend
+git clone https://github.com/BobKeijzer/frontend_chatbot.git
+cd frontend_chatbot
 
 # Install dependencies
 pnpm install
@@ -87,7 +87,7 @@ pnpm start
 
 MIT – free for learning and experimentation 
 
-## Screenshot of page
+## Screenshots of page
 This is the frontend for my chatbot project showing example usage.
 ![Example Part 1](public/Demo1.png)
 ![Example Part 2](public/Demo2.png)
