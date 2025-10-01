@@ -11,7 +11,7 @@ The frontend supports:
 - Viewing chat history and responses  
 - Dark mode and responsive layout  
 
----
+The project was created for **learning purposes**, focusing on Next.js + React responsive frontend, handling of dynamic data, states & API calls to backend and more.
 
 ## Features
 
@@ -19,11 +19,10 @@ The frontend supports:
 - **React hooks** for state management (chats, files, etc.)  
 - **File & folder uploads** integrated with backend RAG indexing  
 - **Sidebar navigation** for chats and documents  
-- **Theme support** with dark/light mode  
+- **Theme support** with dark/light mode 
+- **Components** mostly from [shadcn](https://ui.shadcn.com/) 
 
----
-
-## Getting Started (Local)
+## Getting Started
 
 ### Prerequisites
 
@@ -65,23 +64,10 @@ pnpm build
 pnpm start
 ```
 
----
-
 ## Deployment Plans
 
 * Frontend hosted on **Vercel** (Next.js SSR support) 
 * Connects to **FastAPI backend** (Azure App Services container or code) 
-
----
-
-## Learning Goals
-
-* Next.js + React responsive frontend for AI apps
-* Handling dynamic data, states & API calls to backend
-* File uploads and RAG integration
-* Connecting frontend + backend across platforms
-
----
 
 ## License
 
