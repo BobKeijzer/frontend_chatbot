@@ -25,6 +25,21 @@ export default function MarkdownRenderer({ content }: Props) {
     }
   }
 
+  const sanitizeMarkdown = (input: string) => {
+    return input
+      .split("\n")
+      .map(line => {
+        // If a line starts with 4+ spaces but is not a fenced code block then trim it
+        if (/^\s{4,}/.test(line) && !line.trim().startsWith("```")) {
+          return line.trimStart()
+        }
+        return line
+      })
+      .join("\n")
+  }
+
+  const safeContent = sanitizeMarkdown(content)
+
   return (
     <div className="prose dark:prose-invert max-w-none">
       <ReactMarkdown
@@ -76,7 +91,7 @@ export default function MarkdownRenderer({ content }: Props) {
           ),
         }}
       >
-        {content}
+        {safeContent}
       </ReactMarkdown>
     </div>
   )
