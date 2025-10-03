@@ -75,6 +75,9 @@ MIT – free for learning and experimentation
 
 ## Screenshots of page
 This is the frontend for my chatbot project showing example usage.
-![Example Part 1](public/Demo1.png)
-![Example Part 2](public/Demo2.png)
-![Example Part 3](public/Demo3.png)
+1. Example only answering
+![Example only answering](public/ShowAnswersOnly.png)
+
+2. Same example but showing tool usage and reasoning
+![Example With tools and reasoning](public/ShowAll.png)
+
