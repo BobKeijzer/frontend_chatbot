@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import MarkdownRenderer from "@/components/MarkdownRenderer"
+import { Button } from "@/components/ui/button"
 
 type ToolMessageProps = {
   content: string
@@ -12,12 +13,12 @@ export default function ToolMessage({ content }: ToolMessageProps) {
 
   return (
     <div>
-      <button
+      <Button
+        variant="outline"
         onClick={() => setCollapsed(!collapsed)}
-        className="text-sm text-blue-500 underline mb-1"
       >
         {collapsed ? "Show tool output" : "Hide tool output"}
-      </button>
+      </Button>
       {!collapsed && <MarkdownRenderer content={`\`\`\`\n${content}\n\`\`\``} />}
     </div>
   )

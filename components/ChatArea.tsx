@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import MarkdownRenderer from "@/components/MarkdownRenderer"
 import { ChatMessage } from "@/lib/definitions"
 import ToolMessage from "@/components/ToolMessage"
+import { useChats } from "@/hooks/useChats"
 
 type Props = {
   messages: ChatMessage[]
@@ -11,6 +12,7 @@ type Props = {
 
 export default function ChatArea({ messages }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
+  const { showAnswersOnly } = useChats()
 
   const lastUserIndex = [...messages]
     .map((m, i) => (m.role === "user" ? i : -1))
@@ -23,9 +25,21 @@ export default function ChatArea({ messages }: Props) {
     }
   }, [messages, lastUserIndex])
 
+  // Filter logic depends on context
+  const filteredMessages = showAnswersOnly
+    ? messages.filter((m, i) => {
+        if (m.role === "tool") return false
+        if (m.role === "assistant") {
+          const next = messages[i + 1]
+          return !next || next.role === "user"
+        }
+        return true
+      })
+    : messages
+
   return (
     <div className="flex-1 flex flex-col gap-2 p-4">
-      {messages.map((msg, i) => {
+      {filteredMessages.map((msg, i) => {
         const isUser = msg.role === "user"
         const isTool = msg.role === "tool"
 

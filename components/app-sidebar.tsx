@@ -20,13 +20,15 @@ export default function Appsidebar() {
     renamingChatId,
     newName,
     chats, 
+    showAnswersOnly,
     handleSelectChat,
     handleNewChat,
     handleDeleteChat,
     handleRenameChat,
     setRenamingChatId,
     setNewName, 
-    refreshChats
+    refreshChats,
+    toggleShowAnswersOnly,
   } = useChats()
 
   useEffect(() => { (async () => { 
@@ -156,6 +158,38 @@ export default function Appsidebar() {
                 </CollapsibleContent>
               </Collapsible>
               
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarSeparator />
+
+        {/* Settings */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Settings</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <Collapsible>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton>
+                    <Settings /> Messages
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="flex flex-col gap-1">
+                    <div className="mt-auto p-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={toggleShowAnswersOnly}
+                        className="w-full"
+                      >
+                        {showAnswersOnly ? "Show All" : "Show Answers Only"}
+                      </Button>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

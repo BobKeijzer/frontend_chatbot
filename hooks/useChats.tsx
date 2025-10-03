@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react"
+import { createContext, useContext, useState, ReactNode } from "react"
 import { ChatMessage, ChatListItem } from "@/lib/definitions"
 import { listChats, newChat, loadChat, deleteChat, renameChat } from "@/lib/api"
 
@@ -10,6 +10,7 @@ type ChatsContextType = {
   chats: ChatListItem[]
   renamingChatId: string | null
   newName: string
+  showAnswersOnly: boolean
   setCurrentMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
   handleNewChat: () => Promise<void>
   handleSelectChat: (chatId: string) => Promise<void>
@@ -18,6 +19,7 @@ type ChatsContextType = {
   refreshChats: () => Promise<void>
   setRenamingChatId: (id: string | null) => void
   setNewName: (name: string) => void
+  toggleShowAnswersOnly: () => void
 }
 
 const ChatsContext = createContext<ChatsContextType | null>(null)
@@ -28,6 +30,12 @@ export function ChatsProvider({ children }: { children: ReactNode }) {
   const [chats, setChats] = useState<ChatListItem[]>([])
   const [renamingChatId, setRenamingChatId] = useState<string | null>(null)
   const [newName, setNewName] = useState("")
+  const [showAnswersOnly, setShowAnswersOnly] = useState(true)
+
+  // Toggle between only answering or all messages
+  const toggleShowAnswersOnly = () => {
+    setShowAnswersOnly(prev => !prev)
+  }
 
   // Create a new chat, refresh chatlist and reinitialize messages
   const handleNewChat = async () => {
@@ -77,6 +85,7 @@ export function ChatsProvider({ children }: { children: ReactNode }) {
       chats,
       renamingChatId,
       newName,
+      showAnswersOnly,
       setCurrentMessages,
       handleNewChat,
       handleSelectChat,
@@ -84,7 +93,8 @@ export function ChatsProvider({ children }: { children: ReactNode }) {
       handleRenameChat,
       refreshChats,
       setRenamingChatId,
-      setNewName
+      setNewName,
+      toggleShowAnswersOnly
     }}>
       {children}
     </ChatsContext.Provider>
